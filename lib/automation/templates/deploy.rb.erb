@@ -1,0 +1,25 @@
+# application name
+set :application, 'my_app_name'
+
+load 'lib/site_defaults.rb'
+
+# default values, see:
+#       lib/capistrano/default.rb
+#       ruby/gems/1.9.1/gems/capistrano-3.0.1/lib/capistrano/default.rb
+
+
+# Deploy Tasks
+# ==========================
+
+namespace :deploy do
+
+  task :published do
+      
+  end
+  
+  after :finishing, 'deploy:sometask'
+
+end
+
+
+
