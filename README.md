@@ -1,6 +1,6 @@
 Beaver
 =======
-Beaver is a deployment management system, to manage and deploy all of interlude sites.
+Beaver is a deployment management system, to manage and deploy all of your sites in one command.
 It's utilize [Capistrano](https://github.com/capistrano/capistrano/blob/master/README.md) which is a Remote multi-server automation tool based on Ruby [Rake](http://rake.rubyforge.org/).
 
 A successful deployment with Beaver will result in a directory structure like the following:
@@ -21,23 +21,13 @@ A new directory will be created under the `releases` directory, and the new vers
 
 The `current` folder is a symbolic link, and it will point to the new release directory whenever you will create a new release.
 
-Every new release (relevant only to api.interlude.fm site), will create a snapshot of the database, as it was at the time of the release.
-On the `sandbox` stage environment the snapshot will be saved under the new release, while on the `production` stage environment the snapshot will saved in our amazon RDS.
 
 Installation
 -------------------
 
-This installation guide assumes you have a GIT install, if not please install it [first](https://bitbucket.org/interludedevs/treehouse/wiki/Setting%20up%20git).
-
-
 ### Windows 7
 
-1. Clone the Beaver project into your favorite directory: 
-
-``` sh
-$ git clone https://yourusername@bitbucket.org/interludedevs/beaver.git.
-```
-
+1. Clone the Beaver project into your favorite directory
 
 2. Install RubyGems
 
@@ -62,11 +52,7 @@ $ gem install capistrano -v 3.0.1
 
 ### OSX
 
-1. Clone the Beaver project: 
-		
-``` sh
-$ git clone https://yourusername@bitbucket.org/interludedevs/beaver.git.
-```
+1. Clone the Beaver project
 
 2. Install Capistrano: 
 
@@ -188,10 +174,10 @@ This will display all of the vireos options
 ### Deploy
 
 ``` sh
-$ ruby beaver.rb -e sandbox -s interlude.fm,api.interlude.fm,in.fm
+$ ruby beaver.rb -e sandbox -s example1.com,example2.com,example3.com
 ``` 
 
-Running the `beaver.rb` with those options will deploy the sites: interlude.fm, api.interlude.fm, in.fm into all of the
+Running the `beaver.rb` with those options will deploy the sites: example1.com,example2.com,example3.com into all of the
 configured sandbox servers.
 The `-s` option takes an array of comma delimited sites (no spaces).
 
@@ -199,31 +185,23 @@ The `-s` option takes an array of comma delimited sites (no spaces).
 ### Rollback
 
 ``` sh
-$ ruby beaver.rb -e sandbox -s interlude.fm,api.interlude.fm,in.fm -a rollback
+$ ruby beaver.rb -e sandbox -s  example1.com,example2.com,example3.com -a rollback
 ```
 
 ### Generic tasks
 
 Beaver enable you to run tasks witch are not part of the deploy process.
 
-i.e:
-
-* interlude:api:restore_db
-* interlude:api:delete_db
-* interlude:configure_logs
-* interlude:update_machine_env
-
 ``` sh
-$ ruby beaver.rb -e sandbox -s api.interlude.fm -a interlude:api:restore_db
+$ ruby beaver.rb -e sandbox -s example1.com -a namespace:task
 ```
 
 ``` sh
-$ ruby beaver.rb -e sandbox -a interlude:update_machine_env
+$ ruby beaver.rb -e sandbox -a namespace:task
 ```
 
 ### Some more options
 
-* `-L, --configure-logs` if you specify this option, Beaver will configure the sites log files with the logstash demon  
 * `-H, --hosts` Optional, Let's you list all of the hostnames you wish to deploy to and it will create an environment file with the listed hostnames.
 
 If you wish to query the AWS api in order to get a list of servers hostnames you wish to deploy to (useful in autoscale), you can pass the following params: 
