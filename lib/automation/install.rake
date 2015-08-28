@@ -1,6 +1,5 @@
 require 'erb'
 require 'pathname'
-namespace :interlude do
 	namespace :install do
 
 		desc 'Install sites'
@@ -152,4 +151,3 @@ namespace :interlude do
 
 		  
 	end
-end
