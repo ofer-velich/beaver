@@ -15,19 +15,19 @@ namespace :deploy do
   
   # After the site code has been updated try to relink the virtual host file from the deploy folder
   task :restart do
-    invoke 'interlude:ensure_virtual_host'
+    invoke 'ensure_virtual_host'
   end
 
   # After the site code has been updated try to run updates on the current release
   task :published do
-    invoke 'interlude:admin:update_paths'
-    invoke 'interlude:public_symlink'
-    invoke 'interlude:chown'
-    invoke 'interlude:clear_cache'
+    invoke 'admin:update_paths'
+    invoke 'public_symlink'
+    invoke 'chown'
+    invoke 'clear_cache'
   end
 
   task :finished do
-    invoke 'interlude:ensure_site_enabled', fetch(:sitename)
+    invoke 'ensure_site_enabled', fetch(:sitename)
   end  
   
 end
