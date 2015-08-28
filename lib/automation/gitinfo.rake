@@ -2,7 +2,6 @@ require 'json'
 require 'uri'
 require 'open-uri'
 
-namespace :interlude do
 	namespace :gitinfo do
 
 		desc 'Retrieve the latest releases (if exists)of a given branch'
@@ -15,7 +14,6 @@ namespace :interlude do
 				exit 1
 			end
 
-			json = `curl -s -X GET curl -u buildy:buildyinterlude https://bitbucket.org/api/1.0/repositories/interludedevs/#{repo_name}/branches`
 			hash = JSON.parse(json)
 			
 			releases = []
@@ -109,7 +107,6 @@ namespace :interlude do
 				exit 1
 			end
 
-			json = `curl -s -X GET curl -u buildy:buildyinterlude https://bitbucket.org/api/1.0/repositories/interludedevs/#{repo_name}/tags`
 			hash = JSON.parse(json)
 			tags = hash.keys
 
@@ -130,4 +127,3 @@ namespace :interlude do
 		end
 		  
 	end
-end
